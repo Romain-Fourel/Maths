@@ -1,10 +1,9 @@
 
-package fr.romain.Maths.linearAlgebra;
+package fr.romain.Maths.R_VectorSpace.linearAlgebra;
 
-import java.util.Arrays;
 import java.util.List;
 
-import fr.romain.Maths.Calcul;
+import fr.romain.Maths.R_VectorSpace.Calcul;
 
 /**
  *
@@ -13,8 +12,11 @@ import fr.romain.Maths.Calcul;
 public class Vector extends Matrix{
 
 	
-    public Vector(Double... coords) {
-    	this(Arrays.asList(coords));
+    public Vector(double... coords) {
+    	super(1, coords.length);
+    	for (int i = 0; i < coords.length; i++) {
+			values[0][i] = coords[i];
+		}
     }
     
     public Vector(List<Double> coords) {
@@ -24,11 +26,11 @@ public class Vector extends Matrix{
 		}
     }
     
-    public static Vector of(double a, double b) {
-    	return new Vector(a, b);
+    public static Vector of(double... coords) {
+    	return new Vector(coords);
     }
-    
-    public double getX(){
+
+	public double getX(){
     	return get(0);
     }
     
@@ -84,7 +86,9 @@ public class Vector extends Matrix{
     }
     
     /**
-     * Renvoie un vecteur orthogonal au vecteur u en dimension 2
+     * TODO: généraliser cette fonction en indiquant en paramètres 
+     * la base dans laquelle on veut que le vecteur orthogonal se trouve,
+     * cette base doit être évidemment de même dimension que le vecteur que l'on orthogonalise
      * @param v
      * @return
      */

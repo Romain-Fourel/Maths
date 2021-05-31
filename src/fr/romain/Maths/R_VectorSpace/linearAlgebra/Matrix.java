@@ -1,6 +1,9 @@
-package fr.romain.Maths.linearAlgebra;
+package fr.romain.Maths.R_VectorSpace.linearAlgebra;
 
-import fr.romain.Maths.Calcul;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.romain.Maths.R_VectorSpace.Calcul;
 
 
 public class Matrix {
@@ -20,6 +23,10 @@ public class Matrix {
 	public Matrix(int[] dim) {
 		this(dim[0], dim[1]);
 	}
+	
+	public double[][] getValues(){
+		return values;
+	}
 
 	public double get(int i, int j) {
 		return values[i][j];
@@ -29,6 +36,17 @@ public class Matrix {
 		values[i][j] = value;
 	}
 	
+	public List<Vector> getLines() {
+		List<Vector> vectors = new ArrayList<Vector>();
+		for (double[] ds : values) {
+			vectors.add(new Vector(ds));
+		}
+		return vectors;
+	}
+	
+	public List<Vector> getCols(){
+		return transpose().getLines();
+	}
 		
 	
 	
@@ -65,7 +83,7 @@ public class Matrix {
 
 	/**
 	 * Calculate the identity matrix in dimension dim
-	 * 
+	 *  
 	 * @param dim
 	 * @return
 	 */
@@ -124,14 +142,7 @@ public class Matrix {
 	public int dim() {
 		return dimLine()*dimCol();
 	}
-	
-	
-	/**
-	 * @return a tab which contains the lines dimensions and the column dimensions
-	 */
-	public int[] dims() {
-		return new int[] {dimLine(),dimCol()};
-	}
+
 
 	public int dimLine() {
 		return values.length;
@@ -139,6 +150,13 @@ public class Matrix {
 
 	public int dimCol() {
 		return values[0].length;
+	}
+	
+	/**
+	 * @return a tab which contains the lines dimensions and the column dimensions
+	 */
+	public int[] dims() {
+		return new int[] {dimLine(),dimCol()};
 	}
 
 	public boolean hasSameDim(Matrix matrix) {
@@ -160,10 +178,10 @@ public class Matrix {
 				}
 			}
 			return sum;
-		} else {
-			throw new IllegalArgumentException(
-					"The both matrix have not the same dimensions and are therefore not summable");
 		}
+		throw new IllegalArgumentException(
+				"The both matrix have not the same dimensions and are therefore not summable");
+		
 	}
 	
 	public Matrix minus(Matrix matrix) throws IllegalArgumentException{

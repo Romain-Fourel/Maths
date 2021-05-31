@@ -1,5 +1,5 @@
 
-package fr.romain.Maths;
+package fr.romain.Maths.R_VectorSpace;
 
 
 /**
