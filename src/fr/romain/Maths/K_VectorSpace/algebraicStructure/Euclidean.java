@@ -2,6 +2,7 @@ package fr.romain.Maths.K_VectorSpace.algebraicStructure;
 
 import java.util.function.BiFunction;
 
+import fr.romain.Maths.K_VectorSpace.algebraicObjects.Complex;
 import fr.romain.Maths.K_VectorSpace.algebraicObjects.Matrix;
 
 public interface Euclidean<E> extends VectorSpace<Double, E> {
@@ -78,12 +79,16 @@ public interface Euclidean<E> extends VectorSpace<Double, E> {
 	}
 	
 	public static Euclidean<Matrix<Double>> matricesEuclidean(int dimLines, int dimCols){
-		return of(VectorSpace.matricesVectorSpace(dimLines, dimCols, Field.realField()), 
-				 (m1,m2)->Matrix.usualScalarProd(m1, m2, Field.realField()),
-				 Field.realField());
+		return of(VectorSpace.matricesVectorSpace(dimLines, dimCols, Field.realsField()), 
+				 (m1,m2)->Matrix.usualScalarProd(m1, m2, Field.realsField()),
+				 Field.realsField());
 	}
 	
-	
+	public static Euclidean<Complex> complexEuclidean(){
+		return of(VectorSpace.complexVectorSpace(), 
+				  (z1, z2)->z1.getReal()*z2.getReal()+z1.getIm()*z2.getIm(),
+				  Field.realsField());
+	}
 	
 }
 

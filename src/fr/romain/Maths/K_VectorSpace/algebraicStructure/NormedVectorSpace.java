@@ -27,5 +27,6 @@ public interface NormedVectorSpace<K,E> extends VectorSpace<K, E> {
 	 * @return
 	 */
 	double norm(E e);
+	
 
 }

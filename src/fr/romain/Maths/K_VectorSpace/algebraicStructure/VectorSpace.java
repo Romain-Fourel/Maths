@@ -3,6 +3,7 @@ package fr.romain.Maths.K_VectorSpace.algebraicStructure;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
+import fr.romain.Maths.K_VectorSpace.algebraicObjects.Complex;
 import fr.romain.Maths.K_VectorSpace.algebraicObjects.Matrix;
 
 /**
@@ -95,6 +96,16 @@ public interface VectorSpace<K,E> {
 							  f,
 							  dimLines*dimCols);
 	}
+	
+	public static VectorSpace<Double, Complex> complexVectorSpace(){
+		Field<Double> f = Field.realsField();
+		return VectorSpace.of((z1,z2)->z1.plus(z2),
+				              (r,z)->z.prod(Complex.of(r)),
+				              Complex.zero,
+				              f,
+				              2);
+	}
+	
 }
 
 

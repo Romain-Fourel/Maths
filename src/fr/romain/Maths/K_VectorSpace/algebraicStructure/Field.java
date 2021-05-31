@@ -2,6 +2,8 @@ package fr.romain.Maths.K_VectorSpace.algebraicStructure;
 
 import java.util.function.BinaryOperator;
 
+import fr.romain.Maths.K_VectorSpace.algebraicObjects.Complex;
+
 /**
  * This interface represents the algebraic structure of Field on the set E.
  * This field doesn't aim to necessarily a commutative one
@@ -55,6 +57,8 @@ public interface Field<K> {
 	 */
 	K one();
 	
+	
+	
 	public static<K> Field<K> of(BinaryOperator<K> sum,BinaryOperator<K> prod, K zero, K one){
 		return new Field<K>() {
 
@@ -80,9 +84,22 @@ public interface Field<K> {
 		};
 	}
 	
-	public static Field<Double> realField(){
+	public static Field<Double> realsField(){
 		return of(Double::sum, (e1, e2)->e1*e2, 0.,1.);
 	}
+	
+	public static Field<Complex> complexField(){
+		return of((z1,z2)->z1.plus(z2),
+				  (z1,z2)->z1.prod(z2),
+				  Complex.zero,
+				  Complex.one);
+	}
+	
+	
+	public static Field<Boolean> boolsField(){
+		return of((e1,e2)->e1||e2, (e1,e2)->e1&&e2, false, true);
+	}
+	
 	
 	/**
 	 * WARNING: this structure is not a field!
@@ -91,13 +108,10 @@ public interface Field<K> {
 	 * study Petri Networks
 	 * @return
 	 */
-	public static Field<Double> realDioide(){
+	public static Field<Double> realsDioide(){
 		return of(Math::max, Double::sum, Double.NEGATIVE_INFINITY, 0.);
 	}
 	
-	public static Field<Boolean> boolField(){
-		return of((e1,e2)->e1||e2, (e1,e2)->e1&&e2, false, true);
-	}
 
 
 }
