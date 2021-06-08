@@ -3,7 +3,7 @@ package fr.romain.Maths.linearAlgebra.algebraicObjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Field;
+import fr.romain.Maths.linearAlgebra.algebraicStructure.Ring;
 
 /**
  * This class represents matrices which contains elements of type K
@@ -130,6 +130,32 @@ public class Matrix<K> {
 		throw new IllegalArgumentException("This matrix can't been seen as a vector, dimensions doesn't match");
 	}
 	
+	/**
+	 * 
+	 * @param i the line to delete
+	 * @param j the column to delete
+	 * @return the same matrix of this but without the line i and the column j
+	 */
+	public Matrix<K> getMat(int i,int j) throws IllegalArgumentException{
+		if(i>=dimLines() || j>=dimCols()) {
+			throw new IllegalArgumentException("The number of the line or the column is too high");
+		}
+		Matrix<K> matrix = new Matrix<>(dimLines()-1, dimCols()-1);
+		
+		for (int k = 0; k < dimLines(); k++) {
+			
+			if(k!=i) {
+				for (int k2 = 0; k2 < dimCols(); k2++) {
+					if(k2!=j) {
+						matrix.set(k, k2, get(k, k2));
+					}
+				}
+			}
+
+		}
+		return matrix;
+	}
+	
 	
 	//######################### below are defined all useful operator on matrices ###########################
 	
@@ -140,7 +166,7 @@ public class Matrix<K> {
 	 * @param f
 	 * @return
 	 */
-	public static<K> Matrix<K> usualZero(int[] dims, Field<K> f){
+	public static<K> Matrix<K> usualZero(int[] dims, Ring<K> f){
 		Matrix<K> zero = new Matrix<K>(dims);
 		for (int i = 0; i < zero.dimLines(); i++) {
 			for (int j = 0; j < zero.dimCols(); j++) {
@@ -159,7 +185,7 @@ public class Matrix<K> {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public static<K> Matrix<K> usualSum(Matrix<K> e1, Matrix<K> e2,Field<K> f) throws IllegalArgumentException{
+	public static<K> Matrix<K> usualSum(Matrix<K> e1, Matrix<K> e2,Ring<K> f) throws IllegalArgumentException{
 		
 		if(e1.hasDim(e2.dims())) {
 			Matrix<K> sumMatrix = new Matrix<K>(e1.dims());
@@ -182,7 +208,7 @@ public class Matrix<K> {
 	 * @param e
 	 * @return
 	 */
-	public static<K> Matrix<K> usualTimes(K k,Matrix<K> e, Field<K> f) {
+	public static<K> Matrix<K> usualTimes(K k,Matrix<K> e, Ring<K> f) {
 		Matrix<K> matrix = new Matrix<K>(e.dims());
 		
 		for (int i = 0; i < matrix.dimLines(); i++) {
@@ -194,7 +220,7 @@ public class Matrix<K> {
 		
 	}
 
-	public static<K> Matrix<K> usualOne(int[] dims,Field<K> f){
+	public static<K> Matrix<K> usualOne(int[] dims,Ring<K> f){
 		
 		Matrix<K> one = new Matrix<K>(dims);
 		
@@ -219,7 +245,7 @@ public class Matrix<K> {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	public static<K> Matrix<K> usualProd(Matrix<K> e1,Matrix<K> e2,Field<K> f) throws IllegalArgumentException{
+	public static<K> Matrix<K> usualProd(Matrix<K> e1,Matrix<K> e2,Ring<K> f) throws IllegalArgumentException{
 		
 		if(e1.canBeProdTo(e2)) {
 			
@@ -243,7 +269,8 @@ public class Matrix<K> {
 		throw new IllegalArgumentException("two matrices are multipliable only if e1.dimCols == e2.dimLines");
 	}
 	
-	public static<K> K trace(Matrix<K> matrix,Field<K> f) throws IllegalArgumentException{
+	
+	public static<K> K trace(Matrix<K> matrix,Ring<K> f) throws IllegalArgumentException{
 		if (!matrix.isSquare()) {
 			throw new IllegalArgumentException("the trace for a non square matrix is not defined");
 		}
@@ -254,12 +281,51 @@ public class Matrix<K> {
 		return trace;
 	}
 	
-	public static<K> K usualScalarProd(Matrix<K> m1,Matrix<K> m2, Field<K> f) throws IllegalArgumentException{
+	
+	public static<K> K usualScalarProd(Matrix<K> m1,Matrix<K> m2, Ring<K> f) throws IllegalArgumentException{
 		if(!m1.hasDim(m2.dims())) {
 			throw new IllegalArgumentException("The two matrices has to have the same dimensions");
 		}
 		return trace(usualProd(m1.transpose(), m2, f), f);
 		
+	}
+	
+	
+	/**
+	 * This calculation of the determinant of a matrix is not particularly
+	 * optimised
+	 * TODO: Bareiss Algorithm
+	 * @param <K>
+	 * @param matrix
+	 * @param r
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static<K> K determinant(Matrix<K> matrix,Ring<K> r) throws IllegalArgumentException{
+		if(!matrix.isSquare())
+			throw new IllegalArgumentException("The determinant of a non-square matrix is not defined");
+		
+		if(matrix.dimLines()==1) {
+			return matrix.get(0, 0);
+		}
+		
+		if (matrix.dimLines()==2) {
+			return r.minus(r.prod(matrix.get(0, 0),matrix.get(1, 1)), 
+					       r.prod(matrix.get(0, 1),matrix.get(1, 0)));
+		}
+		K sign = r.sumInv(r.one());;
+		K det = r.zero();
+		
+		for (int j = 0; j < matrix.dimCols(); j++) {
+			if(matrix.get(0, j).equals(r.zero()))
+				continue;
+			sign = r.sumInv(sign);
+			K detRec = determinant(matrix.getMat(0, j), r);
+			det = r.sum(det, r.prod(sign,matrix.get(0, j),detRec));
+			 
+		}
+		
+		return det;
 	}
 		
 }

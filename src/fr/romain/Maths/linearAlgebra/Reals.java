@@ -7,7 +7,7 @@ package fr.romain.Maths.linearAlgebra;
  *
  */
 public class Reals {
-    static final double precision = 0.0000000001;
+    static final double precision = 0.00000000000000001;
     
     public static boolean isNul(double d){
         return Math.abs(d)<precision;

@@ -1,6 +1,6 @@
 package fr.romain.Maths.linearAlgebra.algebraicObjects;
 
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Field;
+import fr.romain.Maths.linearAlgebra.algebraicStructure.Ring;
 
 public class Vector<K> {
 	
@@ -45,7 +45,7 @@ public class Vector<K> {
 		return matrix;
 	}
 	
-	public static<K> Vector<K> usualSum(Vector<K> v1, Vector<K> v2, Field<K> f) throws IllegalArgumentException{
+	public static<K> Vector<K> usualSum(Vector<K> v1, Vector<K> v2, Ring<K> f) throws IllegalArgumentException{
 		if(v1.dim()!=v2.dim())
 			throw new IllegalArgumentException("the two vectors doesn't have the same dimensions. The sum is thus impossible");
 		
@@ -57,7 +57,7 @@ public class Vector<K> {
 		return sum;
 	}
 	
-	public static<K> Vector<K> usualTimes(K k,Vector<K> v1,Field<K> f){
+	public static<K> Vector<K> usualTimes(K k,Vector<K> v1,Ring<K> f){
 		Vector<K> times = new Vector<K>(v1.dim());
 		for (int i = 0; i < times.dim(); i++) {
 			times.set(i, f.prod(k, v1.get(i)));
@@ -65,7 +65,7 @@ public class Vector<K> {
 		return times;
 	}
 	
-	public static<K> Vector<K> usualZero(int dim,Field<K> f){
+	public static<K> Vector<K> usualZero(int dim,Ring<K> f){
 		Vector<K> v = new Vector<K>(dim);
 		for (int i = 0; i < dim; i++) {
 			v.set(i, f.zero());
@@ -73,7 +73,7 @@ public class Vector<K> {
 		return v;
 	}
 	
-	public static<K> K usualScalarProd(Vector<K> v1,Vector<K> v2,Field<K> f) throws IllegalArgumentException{
+	public static<K> K usualScalarProd(Vector<K> v1,Vector<K> v2,Ring<K> f) throws IllegalArgumentException{
 		if(v1.dim()!=v2.dim())
 			throw new IllegalArgumentException("the two vectors doesn't have the same dimensions. The scalar product is thus impossible");
 		
@@ -84,5 +84,14 @@ public class Vector<K> {
 		
 		return scalarProd;
 	}
+	
+	@SafeVarargs
+	public static<K> K determinant(Ring<K> r,Vector<K>... vectors) {
+		return Matrix.determinant(Matrix.byLines(vectors), r);
+	}
 
 }
+
+
+
+

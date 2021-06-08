@@ -23,11 +23,6 @@ public interface Euclidean<E> extends VectorSpace<Double, E> {
 	default double norm(E e) {
 		return Math.sqrt(scalarProd(e, e));
 	}
-	
-	default E minus(E e1,E e2) {
-		return sum(e1, times(-1., e2));
-	}
-	
 	 
 	default double distance(E e1, E e2) {
 		return norm(minus(e1, e2));

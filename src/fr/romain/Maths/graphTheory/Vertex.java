@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Field;
+import fr.romain.Maths.linearAlgebra.algebraicStructure.Ring;
 
 /**
  * This class represents a vertex in a graph
@@ -75,7 +75,7 @@ public class Vertex<V,K extends Comparable<K>> {
 	 * @return <li>null if the list given is null
 	 * @throws IllegalArgumentException
 	 */
-	public static<V,K extends Comparable<K>> K pathLength(List<Vertex<V, K>> list, Field<K> f) 
+	public static<V,K extends Comparable<K>> K pathLength(List<Vertex<V, K>> list, Ring<K> f) 
 			throws IllegalArgumentException{
 		
 		if(list==null) {
@@ -95,7 +95,7 @@ public class Vertex<V,K extends Comparable<K>> {
 	}
 	
 	
-	public List<Vertex<V,K>> shortestPathTo(Vertex<V,K> v,Field<K> f){
+	public List<Vertex<V,K>> shortestPathTo(Vertex<V,K> v,Ring<K> f){
 		return this.shortestPathRec(null,new ArrayList<Vertex<V,K>>(), v,f);
 	}
 	
@@ -106,7 +106,7 @@ public class Vertex<V,K extends Comparable<K>> {
 	 * @param f
 	 * @return
 	 */
-	protected List<Vertex<V, K>> shortestPathRec(Graph<V, K> graph, List<Vertex<V, K>> blackList, Vertex<V, K> arrival, Field<K> f){
+	protected List<Vertex<V, K>> shortestPathRec(Graph<V, K> graph, List<Vertex<V, K>> blackList, Vertex<V, K> arrival, Ring<K> f){
 		blackList.add(this);
 		
 		if(getNeighbours().contains(arrival)) {
@@ -129,6 +129,7 @@ public class Vertex<V,K extends Comparable<K>> {
 			List<Vertex<V,K>> path = vertex.shortestPathRec(graph,blackList, arrival, f);
 			K length = pathLength(path, f);
 			
+			//if there is no path between this and the arrival
 			if(length == null)
 				continue;
 			
@@ -156,7 +157,7 @@ public class Vertex<V,K extends Comparable<K>> {
 	 * @return <li> the sum of all weight of edges which make the shortest way from this to vertex
 	 * 		   <li> null if there is no way from this to vertex
 	 */
-	public K distanceTo(Vertex<V, K> vertex,Field<K> f) {
+	public K distanceTo(Vertex<V, K> vertex,Ring<K> f) {
 		return pathLength(shortestPathTo(vertex,f), f);
 	}
 	

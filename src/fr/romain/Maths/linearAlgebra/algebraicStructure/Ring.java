@@ -1,19 +1,20 @@
 package fr.romain.Maths.linearAlgebra.algebraicStructure;
 
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
 
 /**
- * This interface represents the algebraic structure of Field on the set E.
- * This field doesn't aim to necessarily a commutative one
+ * This interface represents the algebraic structure of Ring on the set K.
+ * This ring doesn't aim to be necessarily a commutative one
  * 
  * In order to avoid having to create several identical interfaces, we allow ourselves
  * to implement in this file any structure composed of two binary operation
  *
  * @param <K> the set on which we add two laws: + and x
  */
-public interface Field<K> {
+public interface Ring<K> {
 	
 	
 	/**
@@ -23,7 +24,7 @@ public interface Field<K> {
 	 * -> sum(e1,e2) == sum(e2,e1)
 	 * @param e1
 	 * @param e2
-	 * @return e1 + e2 with the plus defined by the binaryOperator at the construction of the field.
+	 * @return e1 + e2 with the plus defined by the binaryOperator at the construction of the ring.
 	 */
 	K sum(K e1,K e2);
 	
@@ -61,9 +62,23 @@ public interface Field<K> {
 		return prod;
 	}
 	
+	/**
+	 * @param k
+	 * @return
+	 */
+	default K pow(K e,int k) {
+		if(k==1)
+			return e;
+		if (k%2==0) {
+			return prod(pow(e,k/2),pow(e, k/2));
+		}
+		
+		return prod(prod(pow(e,(k-1)/2),pow(e, (k-1)/2)),e);
+	}
+	
 	
 	/**
-	 * This function returns the neutral element for the "+" operator in the field
+	 * This function returns the neutral element for the "+" operator in the ring
 	 * It has to verify:
 	 * -> for any element e1 in E, there is one other element e2 in E where sum(e1,e2) == zero()
 	 * ->for any e in E, sum(e,zero()) == sum(zero(),e) == e
@@ -72,7 +87,7 @@ public interface Field<K> {
 	K zero();
 	
 	/**
-	 * This function returns the neutral element for the "*" operator in the field
+	 * This function returns the neutral element for the "*" operator in the ring
 	 * It has to verify:
 	 * -> for any element e1 in E, there is one other element e2 in E where prod(e1,e2) == one()
 	 * ->for any e in E, prod(e,one()) == prod(one(),e) == e
@@ -81,9 +96,23 @@ public interface Field<K> {
 	K one();
 	
 	
+	/**
+	 * This function returns the inverse of e for the sum operation
+	 * It has to verify:
+	 * -> sum(e,sumInv(e)) == zero()
+	 * @param e
+	 * @return
+	 */
+	K sumInv(K e);
 	
-	public static<K> Field<K> of(BinaryOperator<K> sum,BinaryOperator<K> prod, K zero, K one){
-		return new Field<K>() {
+	default K minus(K e1, K e2) {
+		return sum(e1, sumInv(e2));
+	}
+	
+	
+	
+	public static<K> Ring<K> of(BinaryOperator<K> sum,BinaryOperator<K> prod, K zero, K one,Function<K, K> sumInv){
+		return new Ring<K>() {
 
 			@Override
 			public K sum(K e1, K e2) {
@@ -104,40 +133,47 @@ public interface Field<K> {
 			public K one() {
 				return one;
 			}
+
+			@Override
+			public K sumInv(K e) {
+				return sumInv.apply(e);
+			}
 		};
 	}
 	
 	
-	public static Field<Double> realsField(){
-		return of(Double::sum, (e1, e2)->e1*e2, 0.,1.);
+	public static Ring<Double> realsRing(){
+		return of(Double::sum, (e1, e2)->e1*e2, 0.,1.,e->-1*e);
 	}
 	
-	public static Field<Complex> complexField(){
+	public static Ring<Complex> complexRing(){
 		return of((z1,z2)->z1.plus(z2),
 				  (z1,z2)->z1.prod(z2),
 				  Complex.zero,
-				  Complex.one);
+				  Complex.one,
+				  z->z.prod(Complex.of(-1)));
 	}
 	
 	
-	public static Field<Boolean> boolsField(){
-		return of((e1,e2)->e1||e2, (e1,e2)->e1&&e2, false, true);
+	public static Ring<Boolean> boolsRing(){
+		return of((e1,e2)->e1||e2, (e1,e2)->e1&&e2, false, true,e->false);
 	}
 	
 	
 	/**
-	 * WARNING: this structure is not a field!
+	 * WARNING: this structure is not a ring!
+	 * Therefore, we put the sum inv on null
 	 * It is only an half-ring and, particularly, a Dioïde
 	 * This structure is however really interessant because it is useful to
 	 * study Petri Networks
 	 * @return
 	 */
-	public static Field<Double> realsDioideMax(){
-		return of(Math::max, Double::sum, Double.NEGATIVE_INFINITY, 0.);
+	public static Ring<Double> realsDioideMax(){
+		return of(Math::max, Double::sum, Double.NEGATIVE_INFINITY, 0.,null);
 	}
 	
-	public static Field<Double> realsDioideMin(){
-		return of(Math::min, Double::sum, Double.POSITIVE_INFINITY, 0.);
+	public static Ring<Double> realsDioideMin(){
+		return of(Math::min, Double::sum, Double.POSITIVE_INFINITY, 0.,null);
 	}
 	
 

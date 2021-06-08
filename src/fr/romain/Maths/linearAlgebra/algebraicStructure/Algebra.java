@@ -27,8 +27,6 @@ public interface Algebra<K,E> extends VectorSpace<K, E>{
 	/**
 	 * The power operator follows directly from the definition of the product operator 
 	 * 
-	 * This way to calculate the power is due to the prod operation is bilinear
-	 * 
 	 * @param e the vector to be raised to power
 	 * @param k the number of times e is multiplied by itself
 	 * @return the product of e by itself k times

@@ -2,6 +2,7 @@ package fr.romain.Maths.linearAlgebra.algebraicStructure;
 
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
 import fr.romain.Maths.linearAlgebra.algebraicObjects.Matrix;
@@ -52,13 +53,31 @@ public interface VectorSpace<K,E> {
 	Field<K> field();
 	
 	/**
+	 * WARNING: Use this default sum inv only if it works in your vector space
+	 * Otherwise, it can be overwritten
+	 * @param e1
+	 * @param e
+	 * @return
+	 */
+	default E sumInv(E e) {
+		K minusOne =  field().sumInv(field().one());
+		return times(minusOne, e);
+	}
+	
+
+	default E minus(E e1,E e2) {
+		return sum(e1, sumInv(e2));
+	}
+	
+	/**
 	 * 
 	 * @return the dimension of this vector space
 	 */
 	int dim();
 	
 	
-	public static<K,E> VectorSpace<K, E> of(BinaryOperator<E> sum, BiFunction<K, E, E> times, E zero,Field<K> f,int dim){
+	public static<K,E> VectorSpace<K, E> of(BinaryOperator<E> sum, BiFunction<K, E, E> times, 
+											E zero,Field<K> f,int dim, Function<E, E> sumInv){
 		return new VectorSpace<K, E>() {
 
 			@Override
@@ -85,11 +104,50 @@ public interface VectorSpace<K,E> {
 			public Field<K> field() {
 				return f;
 			}
+			
+			@Override
+			public E sumInv(E e) {
+				return sumInv.apply(e);			
+			}
 		};
 		
 	}
+
 	
-	 
+	public static<K,E> VectorSpace<K, E> of(BinaryOperator<E> sum, BiFunction<K, E, E> times, 
+			E zero,Field<K> f,int dim){
+			
+		return new VectorSpace<K, E>() {
+
+			@Override
+			public E sum(E e1, E e2) {
+				return sum.apply(e1, e2);
+			}
+
+			@Override
+			public E times(K k, E e) {
+				return times.apply(k, e);
+			}
+
+			@Override
+			public E zero() {
+				return zero;
+			}
+
+			@Override
+			public Field<K> field() {
+				return f;
+			}
+
+			@Override
+			public int dim() {
+				return dim;
+			}
+		};
+	}
+
+	
+	
 	public static<K> VectorSpace<K, Matrix<K>> matricesVS(int dimLines, int dimCols, Field<K> f){
 		return of((e1,e2)->Matrix.usualSum(e1, e2, f),
 							  (k,e)->Matrix.usualTimes(k, e, f), 
