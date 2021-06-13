@@ -9,7 +9,7 @@ package fr.romain.Maths.linearAlgebra.algebraicStructure;
  * @param <K> the scalar of the vector space
  * @param <E> the vectors of the vector space
  */
-public interface NormedVectorSpace<K,E> extends VectorSpace<K, E> {
+public interface NormedVS<K,E> extends VectorSpace<K, E> {
 	
 	/**
 	 * In order to make a normed vector space, we have to add a absolute value to the scalar field
@@ -27,6 +27,7 @@ public interface NormedVectorSpace<K,E> extends VectorSpace<K, E> {
 	 * @return
 	 */
 	double norm(E e);
+	
 	
 
 }

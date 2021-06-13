@@ -28,19 +28,20 @@ class ComplexTests {
 	
 	@Test
 	void toStringTest() {
-		System.out.println(Complex.i);
-		System.out.println(Complex.i.prod(Complex.i));
-		System.out.println(Complex.one);
-		System.out.println(Complex.zero);
-		System.out.println(z1);
-		System.out.println(z2);
+		assertEquals("i", Complex.i.toString());
+		assertEquals("1.0", Complex.one.toString());
+		assertEquals("0", Complex.zero.toString());
+		assertEquals("1.0 + i5.0", new Complex(1, 5).toString());
+		
+		Complex i = Complex.i;
+		
+		System.out.println(i.prod(i));
 	}
 	
 	@Test
 	void prodTest() {
 
-		assertEquals(-1., Complex.i.prod(Complex.i));
-		
+		assertEquals(Complex.of(-1), Complex.i.prod(Complex.i));
 	}
 
 }

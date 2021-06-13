@@ -94,8 +94,8 @@ public interface Algebra<K,E> extends VectorSpace<K, E>{
 	
 	public static<K> Algebra<K, Matrix<K>> matricesAlgebra(int dim,Field<K> f){
 		return Algebra.of(VectorSpace.matricesVS(dim, dim, f), 
-				          (m1,m2)->Matrix.usualProd(m1, m2, f),
-				          Matrix.usualOne(new int[] {dim,dim}, f), 
+				          (m1,m2)->m1.prod(m2,f),
+				          Matrix.one(f,dim,dim), 
 				          f);
 	}
 }

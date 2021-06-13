@@ -95,13 +95,13 @@ public interface Euclidean<E> extends VectorSpace<Double, E> {
 	
 	public static Euclidean<Matrix<Double>> matricesEuclidean(int dimLines, int dimCols){
 		return of(VectorSpace.matricesVS(dimLines, dimCols, Field.realsField()), 
-				 (m1,m2)->Matrix.usualScalarProd(m1, m2, Field.realsField()),
+				 (m1,m2)->m1.scalarProd(m2, Field.realsField()),
 				 Field.realsField());
 	}
 	
 	public static Euclidean<Vector<Double>> vectorsEuclidean(int dim){
 		return of(VectorSpace.vectorsVS(dim, Field.realsField()),
-				  (v1,v2)->Vector.usualScalarProd(v1, v2, Field.realsField()), 
+				  (v1,v2)->v1.scalarProd(v2,Field.realsField()), 
 				  Field.realsField());
 	}
 	

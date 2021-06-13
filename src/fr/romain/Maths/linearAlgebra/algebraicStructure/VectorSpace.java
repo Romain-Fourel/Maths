@@ -149,18 +149,18 @@ public interface VectorSpace<K,E> {
 	
 	
 	public static<K> VectorSpace<K, Matrix<K>> matricesVS(int dimLines, int dimCols, Field<K> f){
-		return of((e1,e2)->Matrix.usualSum(e1, e2, f),
-							  (k,e)->Matrix.usualTimes(k, e, f), 
-							  Matrix.usualZero(new int[] {dimLines,dimCols}, f),
-							  f,
-							  dimLines*dimCols);
+		return of((e1,e2)->e1.plus(e2,f),
+						   (k,e)->e.times(k,f), 
+						   Matrix.zero(f,dimLines,dimCols),
+						   f,
+						   dimLines*dimCols);
 	}
 	
 	
 	public static<K> VectorSpace<K, Vector<K>> vectorsVS(int dim, Field<K> f){
-		return of((v1,v2)->Vector.usualSum(v1, v2, f),
-							  (k,v2)->Vector.usualTimes(k, v2, f), 
-							  Vector.usualZero(dim, f), 
+		return of((v1,v2)->v1.plus(v2,f),
+							  (k,v)->v.times(k,f), 
+							  Vector.zero(dim, f), 
 							  f, 
 							  dim);
 	}

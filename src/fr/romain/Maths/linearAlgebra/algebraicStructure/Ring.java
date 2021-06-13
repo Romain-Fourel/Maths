@@ -67,6 +67,9 @@ public interface Ring<K> {
 	 * @return
 	 */
 	default K pow(K e,int k) {
+		if(k==0) {
+			return one();
+		}
 		if(k==1)
 			return e;
 		if (k%2==0) {
@@ -141,6 +144,7 @@ public interface Ring<K> {
 		};
 	}
 	
+
 	
 	public static Ring<Double> realsRing(){
 		return of(Double::sum, (e1, e2)->e1*e2, 0.,1.,e->-1*e);

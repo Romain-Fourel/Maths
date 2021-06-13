@@ -7,7 +7,7 @@ package fr.romain.Maths.linearAlgebra;
  *
  */
 public class Reals {
-    static final double precision = 0.00000000000000001;
+    static final double precision = 0.00000000001;
     
     public static boolean isNul(double d){
         return Math.abs(d)<precision;
@@ -17,33 +17,17 @@ public class Reals {
     	return isNul(d1-d2);
     }
     
-    public static double norm2(double... values){
-        double norm2 = 0;
-        for (double d : values) {
-			norm2+=d*d;
-		}
-        return Math.sqrt(norm2);
+    public static double norm2(Double... values){
+        return Norms.norm2(Math::abs, values);
     }
     
-    public static double norm1(double... values) {
-    	double norm1 = 0;
-    	for (double d : values) {
-			norm1 += d;
-		}
-    	return norm1;
+    public static double norm1(Double... values) {
+    	return Norms.norm1(Math::abs, values);
     }
     
-    /**
-     * The "infinity norm"
-     * @param values
-     * @return
-     */
-    public static double normInf(double... values) {
-    	double normInf = 0;
-    	for (double d : values) {
-			normInf = Math.max(normInf, d);
-		}
-    	return normInf;
+
+    public static double normInf(Double... values) {
+    	return Norms.normInf(Math::abs, values);
     }
 
 }

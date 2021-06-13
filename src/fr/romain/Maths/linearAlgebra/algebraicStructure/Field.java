@@ -42,7 +42,7 @@ public interface Field<K> extends Ring<K> {
 
 			@Override
 			public K prod(K e1, K e2) {
-				return r.sum(e1, e2);
+				return r.prod(e1, e2);
 			}
 
 			@Override
@@ -69,11 +69,15 @@ public interface Field<K> extends Ring<K> {
 	
 	
 	public static Field<Double> realsField(){
-		return Field.of(Ring.realsRing(), x->1/x);
+		return of(Ring.realsRing(), x->1/x);
 	}
 	
 	public static Field<Complex> complexField(){
-		return Field.of(Ring.complexRing(), z->z.inv());
+		return of(Ring.complexRing(), z->z.inv());
+	}
+	
+	public static Field<Boolean> boolsField(){
+		return of(Ring.boolsRing(), e->true);
 	}
 	
 }

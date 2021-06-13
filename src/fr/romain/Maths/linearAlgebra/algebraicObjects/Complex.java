@@ -117,13 +117,7 @@ public class Complex {
 			return Reals.equals(real, c.getReal()) 
 				&& Reals.equals(im, c.getIm());
 		} catch (Exception e) {
-			try {
-				double d = (Double) obj;
-				
-				return Reals.equals(real, d) && Reals.isNul(im);
-			} catch (Exception e2) {
-				return false;
-			}
+			return false;
 		}
 	}
 
