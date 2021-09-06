@@ -1,10 +1,10 @@
-package fr.romain.Maths.tests;
+package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linalg.objects.Complex;
+import fr.romain.Maths.utils.Complex;
 
 class ComplexTests {
 	

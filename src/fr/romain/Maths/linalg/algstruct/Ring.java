@@ -3,8 +3,8 @@ package fr.romain.Maths.linalg.algstruct;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.objects.Complex;
-import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.Matrix;
+import fr.romain.Maths.utils.Complex;
 
 /**
  * This interface represents the algebraic structure of Ring on the set K.
@@ -90,7 +90,8 @@ public interface Ring<K> {
 	/**
 	 * This function returns the neutral element for the "*" operator in the ring
 	 * It has to verify:
-	 * ->for any e in E, prod(e,one()) == prod(one(),e) == e
+	 * ->for any e in E, prod(e,one()) == prod(one(),e) == e <br>
+	 * If one() is not defined, the Ring will be a pseudo-ring (like matrices ring)
 	 * @return the neutral element for the "*" operator in the field
 	 */
 	K one();

@@ -1,4 +1,4 @@
-package fr.romain.Maths.linalg.objects;
+package fr.romain.Maths.linalg;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,4 @@
-package fr.romain.Maths.linalg.objects;
-
-import fr.romain.Maths.utils.Reals;
+package fr.romain.Maths.utils;
 
 public class Complex {
 	

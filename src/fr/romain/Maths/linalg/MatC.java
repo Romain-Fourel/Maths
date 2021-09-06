@@ -5,9 +5,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 import fr.romain.Maths.linalg.algstruct.Field;
-import fr.romain.Maths.linalg.objects.Complex;
-import fr.romain.Maths.linalg.objects.Matrix;
-import fr.romain.Maths.linalg.objects.Vector;
+import fr.romain.Maths.utils.Complex;
 
 public class MatC extends Matrix<Complex> {
 

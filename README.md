@@ -4,7 +4,9 @@ Ce projet a pour but initial de pouvoir stocker dans des matrices d'autres objet
 Or, pour pouvoir tout de même définir les opérations usuelles sur les matrices (somme, produit, inversion,...), il faut définir des structures algébriques qui régiront les interactions entre les objets.
 
 
-## Le package "linalg.objects"
+## Le package "linalg"
+
+TODO: à réécrire
 
 Ici sont stockés tous les objets mathématiques utiles pour l'algèbre linéaire : 
  - Matrix : représente les matrices contenant des éléments de type générique K. <br>
@@ -17,15 +19,14 @@ Ici sont stockés tous les objets mathématiques utiles pour l'algèbre linéair
 
 Ici sont ajoutées les différentes structures algébriques qui nous serviront à travailler sur les objets mathématiques de notre choix.
 
-Les structures algébriques sont représentés sous forme d'interface. En effet, une structure algébrique (corps, anneau, espace vectoriel) peut être avant tout vue comme un modèle à respecter.<br>
+Les structures algébriques sont représentés sous forme d'interface. En effet, une structure algébrique (corps, anneau, espace vectoriel) peut être avant tout vue comme un modèle à respecter (cahier des charges).<br>
 Le but dans notre cas est de définir pour un type générique K des opérations utiles tels que la somme ou le produit de deux éléments K.
 
-Il y a quatre structures algébriques implémentées : 
+Il y a quatre structures algébriques représentées : 
 <ul>
  <li> Ring : Cette interface représente un anneau, elle requiert donc de définir sur un type générique K la somme, le produit, leurs éléments neutre respectifs ainsi que la fonction qui trouve l'inverse d'un élément pour la loi + (En effet, un anneau requiert l'inversibilité par l'addition de tous ses éléments).
  <li> Field : Cette interface représente un corps et étend l'interface Ring en exigeant en plus une fonction qui trouve l'inverse d'un élément pour la loi x (En effet, un corps demande l'inversibilité par la multiplication de tous ses éléments sauf 0)
- <li> VectorSpace : cette interface représente un K-espace vectoriel sur un type générique E. Elle requiert la somme sur les vecteurs, le produit externe, le neutre pour la somme, un corps sur l'espace des scalaires, une fonction calculant l'inverse d'un élément pour la somme, une liste de vecteurs représentant une base de l'espace vectoriel.<br>
-On entend par vecteur ici, non pas un élément de la classe Vector, mais bien un élément de type E.
+ <li> VectorSpace : cette interface représente un K-espace vectoriel sur un type générique E. Elle requiert la somme sur les vecteurs, le produit externe, le neutre pour la somme, un corps sur l'espace des scalaires, une fonction calculant l'inverse d'un élément pour la somme, une liste de vecteurs représentant une base de l'espace vectoriel. On entend par vecteur ici, non pas un élément de la classe Vector, mais bien un élément de type E.
  <li> Euclidean : cette espace représente un R-espace vectoriel euclidien sur un type générique E. Elle étend l'interface VectorSpace pour les scalaires réels (K=Double). Cette interface requiert un produit scalaire et calcule à partir de cette fonction les opérations usuelles : cos, sin, distance, norme, ect
 </ul>
  
@@ -44,6 +45,10 @@ Ces classes ont vu le jour après le constat suivant : du fait de la généricit
 MatC et MatR implémentent donc Matrix avec respectivement K=Complex et K=Double. Ainsi, les corps utilisés sont prédéfinis et fixes. L'utilisateur n'a plus à s'en soucier.
 
 Il en est de même pour VectR avec la classe Vector et K=Double.
+
+Une alternative à cette solution pour alléger l'utilisation de la classe Matrix est de passer par l'espace vectoriel sur les matrices.
+
+## Le package "utils" :
 
 # Pour finir
 

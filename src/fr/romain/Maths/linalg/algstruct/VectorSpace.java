@@ -5,9 +5,9 @@ import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.objects.Complex;
-import fr.romain.Maths.linalg.objects.Matrix;
-import fr.romain.Maths.linalg.objects.Vector;
+import fr.romain.Maths.linalg.Matrix;
+import fr.romain.Maths.linalg.Vector;
+import fr.romain.Maths.utils.Complex;
 
 /**
  * This interface represents the K-vector space algebraic structure on the set E

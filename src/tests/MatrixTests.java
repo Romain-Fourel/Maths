@@ -1,4 +1,4 @@
-package fr.romain.Maths.tests;
+package tests;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,9 +10,9 @@ import java.util.function.BiPredicate;
 
 import org.junit.jupiter.api.Test;
 
+import fr.romain.Maths.linalg.Matrix;
+import fr.romain.Maths.linalg.Vector;
 import fr.romain.Maths.linalg.algstruct.Field;
-import fr.romain.Maths.linalg.objects.Matrix;
-import fr.romain.Maths.linalg.objects.Vector;
 import fr.romain.Maths.utils.Reals;
 
 class MatrixTests {
