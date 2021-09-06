@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linalg.algebraicStructure.Ring;
+import fr.romain.Maths.linalg.algstruct.Ring;
 
 class RingTests {
 

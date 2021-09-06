@@ -1,13 +1,13 @@
-package fr.romain.Maths.linalg.algebraicStructure;
+package fr.romain.Maths.linalg.algstruct;
 
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.objects.Complex;
+import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.objects.Vector;
 
 /**
  * This interface represents the K-vector space algebraic structure on the set E
@@ -182,7 +182,7 @@ public interface VectorSpace<K,E> {
 				              (r,z)->z.prod(Complex.of(r)),
 				              Complex.zero,
 				              f,
-				              Complex.canonicalBasis());
+				              List.of(Complex.one, Complex.i));
 	}
 	
 }

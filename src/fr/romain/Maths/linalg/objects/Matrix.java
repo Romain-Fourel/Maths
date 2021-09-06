@@ -1,12 +1,12 @@
-package fr.romain.Maths.linalg.algebraicObjects;
+package fr.romain.Maths.linalg.objects;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicStructure.Field;
-import fr.romain.Maths.linalg.algebraicStructure.Ring;
+import fr.romain.Maths.linalg.algstruct.Field;
+import fr.romain.Maths.linalg.algstruct.Ring;
  
 /**
  * This class represents matrices which contains elements of type K

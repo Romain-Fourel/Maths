@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algstruct.Field;
 import fr.romain.Maths.utils.Reals;
 
 class FieldTests {

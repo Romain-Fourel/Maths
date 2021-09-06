@@ -1,10 +1,10 @@
-package fr.romain.Maths.linalg.algebraicStructure;
+package fr.romain.Maths.linalg.algstruct;
 
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
+import fr.romain.Maths.linalg.objects.Complex;
+import fr.romain.Maths.linalg.objects.Matrix;
 
 /**
  * This interface represents the algebraic structure of Ring on the set K.
@@ -109,9 +109,9 @@ public interface Ring<K> {
 		return sum(e1, sumInv(e2));
 	}
 	
-	
-	
-	public static<K> Ring<K> of(BinaryOperator<K> sum,BinaryOperator<K> prod, K zero, K one,Function<K, K> sumInv){
+		
+	public static<K> Ring<K> of(BinaryOperator<K> sum,BinaryOperator<K> prod, 
+								K zero, K one,Function<K, K> sumInv){
 		return new Ring<K>() {
 
 			@Override

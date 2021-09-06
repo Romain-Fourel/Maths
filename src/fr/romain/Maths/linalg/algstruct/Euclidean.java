@@ -1,11 +1,11 @@
-package fr.romain.Maths.linalg.algebraicStructure;
+package fr.romain.Maths.linalg.algstruct;
 
 import java.util.List;
 import java.util.function.BiFunction;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.objects.Complex;
+import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.objects.Vector;
 import fr.romain.Maths.utils.Reals;
 
 public interface Euclidean<E> extends VectorSpace<Double, E> {

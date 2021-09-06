@@ -1,7 +1,7 @@
-package fr.romain.Maths.linalg.vectors;
+package fr.romain.Maths.linalg;
 
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algstruct.Field;
+import fr.romain.Maths.linalg.objects.Vector;
 import fr.romain.Maths.utils.Reals;
 
 public class VectR extends Vector<Double> {

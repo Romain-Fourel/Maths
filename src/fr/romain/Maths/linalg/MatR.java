@@ -1,12 +1,12 @@
-package fr.romain.Maths.linalg.vectors;
+package fr.romain.Maths.linalg;
 
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algstruct.Field;
+import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.objects.Vector;
 import fr.romain.Maths.utils.Reals;
 
 

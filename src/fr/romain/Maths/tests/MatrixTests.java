@@ -10,9 +10,9 @@ import java.util.function.BiPredicate;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algstruct.Field;
+import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.objects.Vector;
 import fr.romain.Maths.utils.Reals;
 
 class MatrixTests {

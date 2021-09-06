@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.objects.Complex;
 
 class ComplexTests {
 	

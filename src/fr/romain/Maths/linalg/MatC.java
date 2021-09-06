@@ -1,13 +1,13 @@
-package fr.romain.Maths.linalg.vectors;
+package fr.romain.Maths.linalg;
 
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
-import fr.romain.Maths.linalg.algebraicObjects.Matrix;
-import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algstruct.Field;
+import fr.romain.Maths.linalg.objects.Complex;
+import fr.romain.Maths.linalg.objects.Matrix;
+import fr.romain.Maths.linalg.objects.Vector;
 
 public class MatC extends Matrix<Complex> {
 
@@ -43,7 +43,7 @@ public class MatC extends Matrix<Complex> {
 		return (MatC) prod(matrix, f);
 	}
 	
-	public MatC pow(int k) throws IllegalArgumentException{
+	public MatC pow(int k){
 		return (MatC) pow(k, f);
 	}
 	

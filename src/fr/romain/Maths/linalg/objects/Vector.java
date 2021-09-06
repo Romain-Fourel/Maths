@@ -1,10 +1,10 @@
-package fr.romain.Maths.linalg.algebraicObjects;
+package fr.romain.Maths.linalg.objects;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-import fr.romain.Maths.linalg.algebraicStructure.Ring;
+import fr.romain.Maths.linalg.algstruct.Ring;
 
 public class Vector<K> {
 	

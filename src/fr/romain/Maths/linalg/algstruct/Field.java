@@ -1,8 +1,8 @@
-package fr.romain.Maths.linalg.algebraicStructure;
+package fr.romain.Maths.linalg.algstruct;
 
 import java.util.function.Function;
 
-import fr.romain.Maths.linalg.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.objects.Complex;
 
 /**
  * This interface represents the algebraic structure of field on the set E
