@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import fr.romain.Maths.linalg.algebraicObjects.Matrix;
 import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Algebra;
 import fr.romain.Maths.linalg.algebraicStructure.Field;
 import fr.romain.Maths.utils.Reals;
 
@@ -46,11 +45,8 @@ public class MatR extends Matrix<Double> {
 		return (MatR) prod(matrix, f);
 	}
 	
-	public MatR pow(int k) throws IllegalArgumentException{
-		if(!isSquare()) {
-			throw new IllegalArgumentException("Only a square matrix can be raised to a power");
-		}
-		return (MatR) (Algebra.matricesAlgebra(dimRows(),f).pow(this, k));
+	public MatR pow(int k){
+		return (MatR) pow(k, f);
 	}
 	
 	public MatR times(double k) {
@@ -119,11 +115,11 @@ public class MatR extends Matrix<Double> {
 		}
 	}
 	
-	public static MatR zero(int... dims) {
+	public static MatR zeros(int... dims) {
 		return (MatR) Matrix.zeros(f, dims);
 	}
 	
-	public static MatR one(int... dims) {
+	public static MatR id(int... dims) {
 		return (MatR) Matrix.id(f, dims);
 	}
 }

@@ -7,7 +7,6 @@ import java.util.function.Function;
 import fr.romain.Maths.linalg.algebraicObjects.Complex;
 import fr.romain.Maths.linalg.algebraicObjects.Matrix;
 import fr.romain.Maths.linalg.algebraicObjects.Vector;
-import fr.romain.Maths.linalg.algebraicStructure.Algebra;
 import fr.romain.Maths.linalg.algebraicStructure.Field;
 
 public class MatC extends Matrix<Complex> {
@@ -45,10 +44,7 @@ public class MatC extends Matrix<Complex> {
 	}
 	
 	public MatC pow(int k) throws IllegalArgumentException{
-		if(!isSquare()) {
-			throw new IllegalArgumentException("Only a square matrix can be raised to a power");
-		}
-		return (MatC) (Algebra.matricesAlgebra(dimRows(),f).pow(this, k));
+		return (MatC) pow(k, f);
 	}
 	
 	public MatC times(Complex k) {
@@ -79,11 +75,12 @@ public class MatC extends Matrix<Complex> {
 		return scalarProd(m, f);
 	}
 	
-	public static MatC zero(int... dims) {
+	public static MatC zeros(int... dims) {
 		return (MatC) Matrix.zeros(f, dims);
 	}
 	
-	public static MatC one(int... dims) {
+	public static MatC id (int... dims) {
 		return (MatC) Matrix.id(f, dims);
 	}
+	
 }

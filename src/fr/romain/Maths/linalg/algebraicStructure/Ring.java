@@ -4,6 +4,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 import fr.romain.Maths.linalg.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.algebraicObjects.Matrix;
 
 /**
  * This interface represents the algebraic structure of Ring on the set K.
@@ -18,10 +19,10 @@ public interface Ring<K> {
 	
 	
 	/**
-	 * This function has to be associative
-	 * -> sum(e1,sum(e2,e3)) == sum(sum(e1,e2),e3)
-	 * It also has to be commutative:
-	 * -> sum(e1,e2) == sum(e2,e1)
+	 * <li>This function has to be associative <br>
+	 *  -> sum(e1,sum(e2,e3)) == sum(sum(e1,e2),e3) <br>
+	 * <li>It also has to be commutative: <br>
+	 *  -> sum(e1,e2) == sum(e2,e1) <br>
 	 * @param e1
 	 * @param e2
 	 * @return e1 + e2 with the plus defined by the binaryOperator at the construction of the ring.
@@ -62,10 +63,7 @@ public interface Ring<K> {
 		return prod;
 	}
 	
-	/**
-	 * @param k
-	 * @return
-	 */
+
 	default K pow(K e,int k) {
 		if(k==0) {
 			return one();
@@ -162,11 +160,27 @@ public interface Ring<K> {
 		return of((e1,e2)->e1||e2, (e1,e2)->e1&&e2, false, true,e->false);
 	}
 	
+	/**
+	 * This ring is a pseudo-ring because it has no neutral element for the
+	 * multiplication
+	 * @param <T>
+	 * @param r
+	 * @param dims
+	 * @return
+	 */
+	public static<T> Ring<Matrix<T>> matricesRing(Ring<T> r,int... dims){
+		return of((Matrix<T> m1,Matrix<T> m2)->m1.plus(m2, r), 
+				(Matrix<T> m1,Matrix<T> m2)->m1.prod(m2, r), 
+				Matrix.zeros(r, dims), 
+				null, 
+				(Matrix<T> m)->m.times(r.sumInv(r.one()), r));
+	}
+	
 	
 	/**
-	 * WARNING: this structure is not a ring!
-	 * Therefore, we put the sum inv on null
-	 * It is only an half-ring and, particularly, a Dioïde
+	 * <strong>WARNING</strong>: this structure is not a ring! <br>
+	 * Therefore, we put the sum inv on null <br>
+	 * It is only an half-ring and, particularly, a Dioïde. <br>
 	 * This structure is however really interessant because it is useful to
 	 * study Petri Networks
 	 * @return
@@ -179,8 +193,6 @@ public interface Ring<K> {
 		return of(Math::min, Double::sum, Double.POSITIVE_INFINITY, 0.,null);
 	}
 	
-
-
 }
 
 

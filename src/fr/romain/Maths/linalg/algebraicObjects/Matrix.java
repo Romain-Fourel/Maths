@@ -169,6 +169,13 @@ public class Matrix<K> {
 		
 	}
 	
+	public Matrix<K> minus(Matrix<K> m,Ring<K> r){
+		if(!hasDim(m.dims())) {
+			throw new NotSameDimensionsException(dims(), m.dims());
+		}
+		return plus(m.times(r.sumInv(r.one()), r), r);
+	}
+	
 	
 	/**
 	 * The usual product on matrices for the ring r
@@ -195,6 +202,24 @@ public class Matrix<K> {
 			return prod;
 		}
 		throw new NotMultipliableMatricesException(dims(), m.dims());
+	}
+	
+	
+	public Matrix<K> pow(int k, Ring<K> r){
+		if(!isSquare()) {
+			throw new NotSquareMatrixException("power");
+		}
+		if(k==0) {
+			return id(r, dims());
+		}
+		if(k==1) {
+			return this;
+		}
+		if(k%2==0) {
+			return pow(k/2, r).prod(pow(k/2, r), r);
+		}
+		
+		return prod(pow((k-1)/2, r).prod(pow((k-1)/2, r), r),r);	
 	}
 	
 	

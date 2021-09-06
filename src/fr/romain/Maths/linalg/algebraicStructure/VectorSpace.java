@@ -54,8 +54,7 @@ public interface VectorSpace<K,E> {
 	Field<K> field();
 	
 	/**
-	 * WARNING: Use this default sum inv only if it works in your vector space
-	 * Otherwise, it can be overwritten
+	 * Default implementation is due to -1*a = -a
 	 * @param e1
 	 * @param e
 	 * @return
