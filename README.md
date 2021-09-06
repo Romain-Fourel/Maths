@@ -6,14 +6,13 @@ Or, pour pouvoir tout de même définir les opérations usuelles sur les matrice
 
 ## Le package "linalg"
 
-TODO: à réécrire
-
 Ici sont stockés tous les objets mathématiques utiles pour l'algèbre linéaire : 
  - Matrix : représente les matrices contenant des éléments de type générique K. <br>
   Pour pouvoir manipuler les éléments contenus dans les matrices, il faut donc spécifier une structure algébrique (tels qu'un anneau ou un corps)
  - Vector : représente des n-uplets d'éléments de type générique K. <br>
  Du fait de la généricité de cette classe, elle demande, à l'instar de Matrix<K>, l'utilisation de structures algébriques.
- - Complex : représente les nombres complexes et implémente les principales fonctions usuelles (somme,produit,module,élément conjugé,ect)
+ 
+Nous reviendrons plus tard sur les classes MatR, MatC et VectR
 
 ## Le package "linalg.algstruct"
 
@@ -38,20 +37,16 @@ Les structures algébriques les plus courantes ont déjà été implémentées :
 <li> Pour l'interface Euclidean : les R-ev euclidiens usuels sur les matrices, vecteurs et complexes sont implémentés.
 </p>
 
-## Les classes MatC,MatR et VectR : 
+## Solutions pour simplifier la classe Matrix
 
-Ces classes ont vu le jour après le constat suivant : du fait de la généricité de la classe Matrix, l'utilisation de cette dernière est assez lourde en écriture. En effet, pour chaque opération utilisée (plus,prod,inv), il faut spécifier l'anneau ou le corps utilisé pour les éléments contenus dans la matrice.
+Contexte : Etant donné que la classe Matrix permet de gérer les opérations usuelles sur les matrices contenant un type générique K, les méthodes qui en découlent sont lourdes à l'écriture. En effet, l'utilisateur doit spécifier pour chaque méthode (plus,prod,gaussInv) l'anneau ou le corps sur lequel il souhaite travailler.
 
-MatC et MatR implémentent donc Matrix avec respectivement K=Complex et K=Double. Ainsi, les corps utilisés sont prédéfinis et fixes. L'utilisateur n'a plus à s'en soucier.
-
-Il en est de même pour VectR avec la classe Vector et K=Double.
-
-Une alternative à cette solution pour alléger l'utilisation de la classe Matrix est de passer par l'espace vectoriel sur les matrices.
-
+Pour simplifier cette écriture, deux possibilités ont été trouvées :
+ - la première : On manipule les objets Matrix via une implémentation de l'interface VectorSpace qui ne propose que les opérations sur les matrices vues comme des vecteurs.
+ - la seconde : On créer une classe qui hérite de Matrix pour K déterminé. Ce sont les classes MatR, MatC et VectR. Le but est d'éviter à l'utilisateur de devoir spécifier les structures algébriques sur K avec lesquelles il veut travailler. Ces dernières sont prédéfinies comme final static dans chaque classe.
 ## Le package "utils" :
 
 # Pour finir
 
 Ce projet n'a finalement pas pour réel but d'optimiser l'écriture de code ou l'implémentation de nouvelles structures. Il a seulement pour but d'harmoniser du mieux possible les relations entre objets et structures tout en essayant de rester le plus général possible.
-
 
