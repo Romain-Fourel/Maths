@@ -1,6 +1,8 @@
-package fr.romain.Maths.linearAlgebra.algebraicObjects;
+package fr.romain.Maths.linalg.algebraicObjects;
 
-import fr.romain.Maths.linearAlgebra.Reals;
+import java.util.List;
+
+import fr.romain.Maths.utils.Reals;
 
 public class Complex {
 	
@@ -88,6 +90,10 @@ public class Complex {
 	
 	public Complex conjugate() {
 		return new Complex(real, -im);
+	}
+	
+	public static List<Complex> canonicalBasis(){
+		return List.of(one, i);
 	}
 
 

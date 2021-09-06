@@ -1,8 +1,8 @@
 package fr.romain.Maths.geom2D;
 
-import fr.romain.Maths.linearAlgebra.Reals;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Vector;
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Euclidean;
+import fr.romain.Maths.linalg.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.algebraicStructure.Euclidean;
+import fr.romain.Maths.utils.Reals;
 
 public class Line {
 	
@@ -26,11 +26,11 @@ public class Line {
 	 * in a plan
 	 */
 	public Line(double a,double b,double c) {
-        if (Reals.isNul(b) && Reals.isNul(a)) {
+        if (Reals.isNull(b) && Reals.isNull(a)) {
             p1 = new Point(0,0);
             p2 = new Point(0,0);
         }
-        else if (Reals.isNul(b)) {
+        else if (Reals.isNull(b)) {
             p1 = new Point(-c/a,0);
             p2 = new Point(-c/a,1);
         }     
@@ -112,7 +112,7 @@ public class Line {
      * @return
      */
     public boolean contains(Point p) {
-    	return Reals.isNul(p.getX()*getA()+p.getY()*getB()+getC());
+    	return Reals.isNull(p.getX()*getA()+p.getY()*getB()+getC());
     }
     
     public boolean isParallel(Line l) {
@@ -123,9 +123,9 @@ public class Line {
         if (isParallel(l)) {
         	throw new IllegalArgumentException("The two lines are parallels, there is thus no intersection");
         }
-        if(Reals.isNul(getB()))
+        if(Reals.isNull(getB()))
         	return new Point(p1.x, l.steeringCoef()*p1.x+l.ordOrigin());
-        else if(Reals.isNul(l.getB()))
+        else if(Reals.isNull(l.getB()))
         	return new Point(l.getP1().x, steeringCoef()*l.getP1().x+ordOrigin());
         else {
         	double a1 = steeringCoef();
@@ -151,9 +151,9 @@ public class Line {
         catch(Exception e) {
             return false;
         }
-        if (Reals.isNul(getA()-d.getA())
-            && Reals.isNul(getB()-d.getB())
-            && Reals.isNul(getC()-d.getC()))
+        if (Reals.isNull(getA()-d.getA())
+            && Reals.isNull(getB()-d.getB())
+            && Reals.isNull(getC()-d.getC()))
         {
             return true;
         }

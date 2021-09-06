@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linearAlgebra.Reals;
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algebraicStructure.Field;
+import fr.romain.Maths.utils.Reals;
 
 class FieldTests {
 

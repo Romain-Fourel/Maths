@@ -62,6 +62,8 @@ public class GraphsGUI extends JFrame {
 		
 		JMenuItem actionsMenu = new JMenuItem("Actions");
 		menuBar.add(actionsMenu);
+		
+		contentPane.add(menuBar);
 
 	}
 	

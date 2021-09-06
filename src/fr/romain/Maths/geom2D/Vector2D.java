@@ -1,11 +1,11 @@
 package fr.romain.Maths.geom2D;
 
-import fr.romain.Maths.linearAlgebra.Reals;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Vector;
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Euclidean;
-import fr.romain.Maths.linearAlgebra.vectors.VectorDouble;
+import fr.romain.Maths.linalg.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.algebraicStructure.Euclidean;
+import fr.romain.Maths.linalg.vectors.VectR;
+import fr.romain.Maths.utils.Reals;
 
-public class Vector2D extends VectorDouble {
+public class Vector2D extends VectR {
 	
 	private final static Euclidean<Vector<Double>> e = Euclidean.vectorsEuclidean(2);
 	
@@ -36,11 +36,11 @@ public class Vector2D extends VectorDouble {
     public Vector2D getOrthogonal() {
         
         double Vx,Vy;
-        if (Reals.isNul(getY())) {
+        if (Reals.isNull(getY())) {
             Vx = 0;
             Vy = 1;
         }
-        else if (Reals.isNul(getX())){
+        else if (Reals.isNull(getX())){
             Vx = 1;
             Vy = 0;
         }

@@ -1,4 +1,4 @@
-package fr.romain.Maths.graphTheory;
+package fr.romain.Maths.graphs;
 
 /**
  * This class is not used to implement graphs or vertices. <br>

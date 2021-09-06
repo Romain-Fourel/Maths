@@ -1,11 +1,12 @@
-package fr.romain.Maths.linearAlgebra.algebraicStructure;
+package fr.romain.Maths.linalg.algebraicStructure;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
-import fr.romain.Maths.linearAlgebra.Reals;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Matrix;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.algebraicObjects.Matrix;
+import fr.romain.Maths.linalg.algebraicObjects.Vector;
+import fr.romain.Maths.utils.Reals;
 
 public interface Euclidean<E> extends VectorSpace<Double, E> {
 
@@ -76,11 +77,6 @@ public interface Euclidean<E> extends VectorSpace<Double, E> {
 			}
 
 			@Override
-			public int dim() {
-				return vs.dim();
-			}
-
-			@Override
 			public double scalarProd(E e1, E e2) {
 				return scalarProd.apply(e1, e2);
 			}
@@ -88,6 +84,11 @@ public interface Euclidean<E> extends VectorSpace<Double, E> {
 			@Override
 			public Field<Double> field() {
 				return f;
+			}
+
+			@Override
+			public List<E> getBasis() {
+				return vs.getBasis();
 			}
 		};
 	}

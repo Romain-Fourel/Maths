@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.algebraicObjects.Complex;
 
 class ComplexTests {
 	
@@ -33,9 +33,6 @@ class ComplexTests {
 		assertEquals("0", Complex.zero.toString());
 		assertEquals("1.0 + i5.0", new Complex(1, 5).toString());
 		
-		Complex i = Complex.i;
-		
-		System.out.println(i.prod(i));
 	}
 	
 	@Test

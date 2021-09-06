@@ -1,13 +1,17 @@
-package fr.romain.Maths.linearAlgebra.algebraicStructure;
+package fr.romain.Maths.linalg.algebraicStructure;
 
+import java.util.List;
 import java.util.function.BinaryOperator;
 
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Matrix;
+import fr.romain.Maths.linalg.algebraicObjects.Matrix;
 
 /**
  * This interface represents the algebraic structure : algebra over a Field
  * This structure extends the k-vector space
  * Indeed, we define a k-algebra by : (E,+,.,*) with (E,+,.) a k-vector space
+ * 
+ * <p style="color:red"> WARNING : MAYBE USELESS </p>
+ * 
  * @author Romain
  * @param K the scalar set
  * @param E the vector space
@@ -70,11 +74,6 @@ public interface Algebra<K,E> extends VectorSpace<K, E>{
 			}
 
 			@Override
-			public int dim() {
-				return vs.dim();
-			}
-
-			@Override
 			public E prod(E e1, E e2) {
 				return prod.apply(e1, e2);
 			}
@@ -88,14 +87,19 @@ public interface Algebra<K,E> extends VectorSpace<K, E>{
 			public Field<K> field() {
 				return f;
 			}
+
+			@Override
+			public List<E> getBasis() {
+				return vs.getBasis();
+			}
 		};
 	}
 
 	
-	public static<K> Algebra<K, Matrix<K>> matricesAlgebra(int dim,Field<K> f){
+	public static<K> Algebra<K,Matrix<K>> matricesAlgebra(int dim,Field<K> f){
 		return Algebra.of(VectorSpace.matricesVS(dim, dim, f), 
 				          (m1,m2)->m1.prod(m2,f),
-				          Matrix.one(f,dim,dim), 
+				          Matrix.id(f,dim,dim), 
 				          f);
 	}
 }

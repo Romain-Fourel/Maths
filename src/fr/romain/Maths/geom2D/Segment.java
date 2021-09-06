@@ -1,6 +1,6 @@
 package fr.romain.Maths.geom2D;
 
-import fr.romain.Maths.linearAlgebra.Reals;
+import fr.romain.Maths.utils.Reals;
 
 public class Segment extends Line {
 
@@ -15,7 +15,7 @@ public class Segment extends Line {
 	@Override
 	public boolean contains(Point p) {
 		if(associatedLine().contains(p)) {
-			if(Reals.isNul(getB())) {
+			if(Reals.isNull(getB())) {
 				return ( p1.y<=p2.y && p.y >= p1.y && p.y<=p2.y) || (p1.y>=p2.y && p.y<=p1.y && p.y>=p2.y);
 			}
 			return ( p1.x<=p2.x && p.x >= p1.x && p.x<=p2.x) || (p1.x>=p2.x && p.x<=p1.x && p.x>=p2.x);

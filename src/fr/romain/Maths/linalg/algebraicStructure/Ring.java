@@ -1,9 +1,9 @@
-package fr.romain.Maths.linearAlgebra.algebraicStructure;
+package fr.romain.Maths.linalg.algebraicStructure;
 
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.algebraicObjects.Complex;
 
 /**
  * This interface represents the algebraic structure of Ring on the set K.
@@ -92,7 +92,6 @@ public interface Ring<K> {
 	/**
 	 * This function returns the neutral element for the "*" operator in the ring
 	 * It has to verify:
-	 * -> for any element e1 in E, there is one other element e2 in E where prod(e1,e2) == one()
 	 * ->for any e in E, prod(e,one()) == prod(one(),e) == e
 	 * @return the neutral element for the "*" operator in the field
 	 */

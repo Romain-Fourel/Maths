@@ -1,4 +1,4 @@
-package fr.romain.Maths.graphTheory;
+package fr.romain.Maths.graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Matrix;
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Algebra;
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Field;
+import fr.romain.Maths.linalg.algebraicObjects.Matrix;
+import fr.romain.Maths.linalg.algebraicStructure.Algebra;
+import fr.romain.Maths.linalg.algebraicStructure.Field;
 
 /**
  * This implementation of Graph can represent the most of kind of graphs.
@@ -82,7 +82,7 @@ public class Graph<V,K extends Comparable<K>> {
 		
 		this(f);
 		
-		if (values.size()!=adjMatrix.dimLines()) {
+		if (values.size()!=adjMatrix.dimRows()) {
 			throw new IllegalArgumentException("the list of values and the numbers of lines of the matrix has to be the same!");
 		}
 		if (!adjMatrix.isSquare()) {

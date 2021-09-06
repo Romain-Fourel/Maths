@@ -1,9 +1,11 @@
-package fr.romain.Maths.linearAlgebra.algebraicObjects;
+package fr.romain.Maths.linalg.algebraicObjects;
 
 /**
  * In this class, we represent a rational number by two integers:
  * <li>the numerator (symbolized by p)
  * <li>the denominator (symbolized by q)
+ * 
+ * <p style="color:orange"> WARNING : NOT OPERATIONNAL </p>
  * 
  * This class automatically transform the rational number to its irreductible form at the 
  * construction of the object

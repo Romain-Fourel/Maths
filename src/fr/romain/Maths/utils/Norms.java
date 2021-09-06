@@ -1,4 +1,4 @@
-package fr.romain.Maths.linearAlgebra;
+package fr.romain.Maths.utils;
 
 import java.util.function.Function;
 

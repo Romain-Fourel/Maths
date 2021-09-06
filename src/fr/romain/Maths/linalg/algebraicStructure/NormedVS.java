@@ -1,8 +1,10 @@
-package fr.romain.Maths.linearAlgebra.algebraicStructure;
+package fr.romain.Maths.linalg.algebraicStructure;
 
 /**
  * This interface is used to represents a vector space to which we add a norm
- * This interface is useful for user who want to work with distances but not with angles
+ * This interface is useful for user who want to work with distances but not with angles <br>
+ * 
+ * <p style="color:red"> WARNING : MAYBE USELESS </p>
  * 
  * @author romain
  *

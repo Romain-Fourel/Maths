@@ -1,12 +1,13 @@
-package fr.romain.Maths.linearAlgebra.algebraicStructure;
+package fr.romain.Maths.linalg.algebraicStructure;
 
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Complex;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Matrix;
-import fr.romain.Maths.linearAlgebra.algebraicObjects.Vector;
+import fr.romain.Maths.linalg.algebraicObjects.Complex;
+import fr.romain.Maths.linalg.algebraicObjects.Matrix;
+import fr.romain.Maths.linalg.algebraicObjects.Vector;
 
 /**
  * This interface represents the K-vector space algebraic structure on the set E
@@ -71,13 +72,22 @@ public interface VectorSpace<K,E> {
 	
 	/**
 	 * 
+	 * @return a basis of this vector space. 
+	 * <br> It is better that if the basis is a canonical one
+	 */
+	List<E> getBasis();
+	
+	/**
+	 * 
 	 * @return the dimension of this vector space
 	 */
-	int dim();
+	default int dim() {
+		return getBasis().size();
+	}
 	
 	
 	public static<K,E> VectorSpace<K, E> of(BinaryOperator<E> sum, BiFunction<K, E, E> times, 
-											E zero,Field<K> f,int dim, Function<E, E> sumInv){
+											E zero,Field<K> f,List<E> basis, Function<E, E> sumInv){
 		return new VectorSpace<K, E>() {
 
 			@Override
@@ -95,10 +105,6 @@ public interface VectorSpace<K,E> {
 				return zero;
 			}
 
-			@Override
-			public int dim() {
-				return dim;
-			}
 
 			@Override
 			public Field<K> field() {
@@ -109,13 +115,18 @@ public interface VectorSpace<K,E> {
 			public E sumInv(E e) {
 				return sumInv.apply(e);			
 			}
+
+			@Override
+			public List<E> getBasis() {
+				return basis;
+			}
 		};
 		
 	}
 
 	
 	public static<K,E> VectorSpace<K, E> of(BinaryOperator<E> sum, BiFunction<K, E, E> times, 
-			E zero,Field<K> f,int dim){
+			E zero,Field<K> f,List<E> basis){
 			
 		return new VectorSpace<K, E>() {
 
@@ -140,9 +151,10 @@ public interface VectorSpace<K,E> {
 			}
 
 			@Override
-			public int dim() {
-				return dim;
+			public List<E> getBasis() {
+				return basis;
 			}
+
 		};
 	}
 
@@ -151,9 +163,9 @@ public interface VectorSpace<K,E> {
 	public static<K> VectorSpace<K, Matrix<K>> matricesVS(int dimLines, int dimCols, Field<K> f){
 		return of((e1,e2)->e1.plus(e2,f),
 						   (k,e)->e.times(k,f), 
-						   Matrix.zero(f,dimLines,dimCols),
+						   Matrix.zeros(f,dimLines,dimCols),
 						   f,
-						   dimLines*dimCols);
+						   Matrix.canonicalBasis(f, dimLines*dimCols));
 	}
 	
 	
@@ -162,7 +174,7 @@ public interface VectorSpace<K,E> {
 							  (k,v)->v.times(k,f), 
 							  Vector.zero(dim, f), 
 							  f, 
-							  dim);
+							  Vector.canonicalBasis(dim, f));
 	}
 	
 	public static VectorSpace<Double, Complex> complexVS(){
@@ -171,7 +183,7 @@ public interface VectorSpace<K,E> {
 				              (r,z)->z.prod(Complex.of(r)),
 				              Complex.zero,
 				              f,
-				              2);
+				              Complex.canonicalBasis());
 	}
 	
 }

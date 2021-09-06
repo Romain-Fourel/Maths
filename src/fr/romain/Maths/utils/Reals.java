@@ -1,6 +1,5 @@
 
-package fr.romain.Maths.linearAlgebra;
-
+package fr.romain.Maths.utils;
 
 /**
  * This class aims to contains all useful function on reals numbers
@@ -9,12 +8,12 @@ package fr.romain.Maths.linearAlgebra;
 public class Reals {
     static final double precision = 0.00000000001;
     
-    public static boolean isNul(double d){
+    public static boolean isNull(double d){
         return Math.abs(d)<precision;
     }
     
     public static boolean equals(double d1, double d2) {
-    	return isNul(d1-d2);
+    	return isNull(d1-d2);
     }
     
     public static double norm2(Double... values){

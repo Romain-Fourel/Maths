@@ -1,6 +1,10 @@
-package fr.romain.Maths.linearAlgebra.algebraicObjects;
+package fr.romain.Maths.linalg.algebraicObjects;
 
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Ring;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiPredicate;
+
+import fr.romain.Maths.linalg.algebraicStructure.Ring;
 
 public class Vector<K> {
 	
@@ -76,6 +80,10 @@ public class Vector<K> {
 		return times;
 	}
 	
+	public boolean isNull(Ring<K> r, BiPredicate<K, K> equals) {
+		return equals(zero(dim(), r), equals);
+	}
+	
 	public static<K> Vector<K> zero(int dim,Ring<K> r){
 		Vector<K> v = new Vector<K>(dim);
 		for (int i = 0; i < dim; i++) {
@@ -96,11 +104,47 @@ public class Vector<K> {
 		return scalarProd;
 	}
 	
+	/**
+	 * @return the number of zeros before the first non null element
+	 */
+	public int nbLeftZeros(Ring<K> r, BiPredicate<K, K> equals) {
+		int nbLeftZeros = 0;
+		for (K k : getValues()) {
+			if(equals.test(k, r.zero()))
+				nbLeftZeros++;
+			else {
+				return nbLeftZeros;
+			}
+		}
+		return nbLeftZeros;
+	}
+	
 	@SafeVarargs
 	public static<K> K determinant(Ring<K> r,Vector<K>... vectors) throws IllegalArgumentException{
 		if(vectors.length!=vectors[0].dim())
 			throw new IllegalArgumentException("It must be as much vectors as the dimension");
-		return Matrix.byLines(vectors).recDet(r);
+		return Matrix.byRows(vectors).recDet(r);
+	}
+	
+	public static<K> Vector<K> oneAt(int i,int dim,Ring<K> r){
+		Vector<K> v = new Vector<K>(dim);
+		for (int k = 0; k < dim; k++) {
+			if(k==i) {
+				v.set(i, r.one());
+			}
+			else {
+				v.set(i, r.zero());
+			}
+		}
+		return v;
+	}
+	
+	public static<K> List<Vector<K>> canonicalBasis(int dim,Ring<K> r){
+		List<Vector<K>> basis = new ArrayList<Vector<K>>();
+		for (int i = 0; i < dim; i++) {
+			basis.add(oneAt(i, dim, r));
+		}
+		return basis;
 	}
 	
 	@Override
@@ -112,6 +156,47 @@ public class Vector<K> {
 				s+=", ";
 		}
 		return s+")";
+	}
+	
+	
+	/**
+	 * Warning: this function test the equality of each term in the vector
+	 * by using the equals method on K
+	 * If you want to test the equality with an other comparator, uses the equals
+	 * which uses a given predicate
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object obj) {
+		try {
+			
+			Vector<K> v = (Vector<K>) obj;
+			
+			if(dim()!=v.dim())
+				return false;
+			
+			for (int i = 0; i < dim(); i++) {
+				if(!get(i).equals(v.get(i)))
+					return false;
+			}
+			return true;
+			
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public boolean equals(Vector<K> v,BiPredicate<K, K> equals) {
+		if(dim()!=v.dim())
+			return false;
+		
+		for (int i = 0; i < dim(); i++) {
+			if (!equals.test(get(i),v.get(i))) {
+				return false;
+			}
+		}
+		return true;
+		
 	}
 
 }

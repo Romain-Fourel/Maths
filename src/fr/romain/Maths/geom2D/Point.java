@@ -1,7 +1,7 @@
 package fr.romain.Maths.geom2D;
 
 import fr.romain.Maths.gui.Board;
-import fr.romain.Maths.linearAlgebra.Reals;
+import fr.romain.Maths.utils.Reals;
 
 public class Point implements Drawable{
 	

@@ -1,4 +1,4 @@
-package fr.romain.Maths.graphTheory;
+package fr.romain.Maths.graphs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.romain.Maths.linearAlgebra.algebraicStructure.Ring;
+import fr.romain.Maths.linalg.algebraicStructure.Ring;
 
 /**
  * This class represents a vertex in a graph
