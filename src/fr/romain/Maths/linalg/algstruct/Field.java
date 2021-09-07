@@ -5,7 +5,7 @@ import java.util.function.Function;
 import fr.romain.Maths.utils.Complex;
 
 /**
- * This interface represents the algebraic structure of field on the set E
+ * This interface represents the algebraic structure of field on the set K
  * Therefore, we add to the ring the division operator because a field is a ring where
  * every elements except the zero has an inverse on the multiplication operator
  * @author romain

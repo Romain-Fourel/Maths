@@ -77,8 +77,8 @@ public class MatC extends Matrix<Complex> {
 		return (MatC) Matrix.zeros(f, dims);
 	}
 	
-	public static MatC id (int... dims) {
-		return (MatC) Matrix.id(f, dims);
+	public static MatC id (int dim) {
+		return (MatC) Matrix.id(f, dim);
 	}
 	
 }

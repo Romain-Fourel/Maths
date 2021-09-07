@@ -99,7 +99,7 @@ public class Matrix<K> {
 
 	/**
 	 * 
-	 * @return the number of elements in a row
+	 * @return the number of rows
 	 */
 	public int dimRows() {
 		return values.length;
@@ -107,7 +107,7 @@ public class Matrix<K> {
 
 	/**
 	 * 
-	 * @return the number of elements in a column
+	 * @return the number of columns
 	 */
 	public int dimCols() {
 		return values[0].length;
@@ -134,7 +134,7 @@ public class Matrix<K> {
 	}
 	
 	/**
-	 * the usual scalar multiplication in the vector space of matrices for a field f
+	 * the usual external product in the vector space of matrices for a ring r
 	 */
 	public Matrix<K> times(K k, Ring<K> r) {
 		Matrix<K> matrix = new Matrix<K>(dims());
@@ -150,7 +150,7 @@ public class Matrix<K> {
 	
 	
 	/**
-	 * The usual sum in the vector space of matrices for a field f
+	 * The usual sum in the vector space of matrices for a ring r
 	 */
 	public Matrix<K> plus(Matrix<K> m,Ring<K> r){
 		
@@ -182,13 +182,10 @@ public class Matrix<K> {
 	 */
 	public Matrix<K> prod(Matrix<K> m,Ring<K> r){
 		
-		if(canBeProdTo(m)) {
-			
-			
+		if(canBeProdTo(m)) {	
 			Matrix<K> prod = new Matrix<K>(dimRows(),m.dimCols());
 	
 			for (int i = 0; i < dimRows(); i++) {
-	
 				for (int j = 0; j < m.dimCols(); j++) {
 	
 					K sum = r.zero();
@@ -210,7 +207,7 @@ public class Matrix<K> {
 			throw new NotSquareMatrixException("power");
 		}
 		if(k==0) {
-			return id(r, dims());
+			return id(r, dimRows());
 		}
 		if(k==1) {
 			return this;
@@ -279,7 +276,7 @@ public class Matrix<K> {
 			}
 			return vec;
 		}
-		throw new NotMatchingDimensionsException("This matrix can't been seen as a vector, dimensions doesn't match");
+		throw new NotMatchingDimensionsException("This matrix can't been seen as a vector");
 	}
 	
 	
@@ -391,7 +388,7 @@ public class Matrix<K> {
 	 * square matrices
 	 * 
 	 * This calculate the inverse of this matrix with the formula which uses
-	 * the comatrix, this is thus not an optimized method when n>4, but funny
+	 * the comatrix, this is thus not an optimized method when n>4, but funny.
 	 * It is better to use the inv method which uses the gaussian elimination
 	 * @param f the field on scalar, has to be a commutative one
 	 * @return the inverse of this matrix
@@ -531,7 +528,7 @@ public class Matrix<K> {
 	 * Returns the two matrices of dim (dimRows,i) and (dimRows,dimCols-i)
 	 * Usually for the purpose of extracting the matrices from an augmented matrix after
 	 * having performing elementary rows operations on the augmented matrix
-	 * @param split the last row of the first matrix
+	 * @param split : the last row of the first matrix
 	 * @return
 	 */
 
@@ -681,13 +678,13 @@ public class Matrix<K> {
 			throw new NotSquareMatrixException("inversion of a matrix");
 		}
 		
-		Matrix<K> augmMatrix = augmRow(id(f, dims()));
+		Matrix<K> augmMatrix = augmRow(id(f, dimRows()));
 		
 		Matrix<K> reduced = augmMatrix.toReducedRowEchelonForm(f, abs, equals);
 
 		List<Matrix<K>> results = reduced.splitRows(dimRows());
 		
-		if(!results.get(0).equals(id(f, dims()), equals)) {
+		if(!results.get(0).equals(id(f, dimRows()), equals)) {
 			throw new NotInversibleMatrixException();
 		}
 		return results.get(1);
@@ -717,7 +714,7 @@ public class Matrix<K> {
 		
 		List<Vector<K>> kerBasis = new ArrayList<Vector<K>>();
 		
-		Matrix<K> augmented = augmCol(id(f, dimCols(),dimCols()));
+		Matrix<K> augmented = augmCol(id(f, dimCols()));
 		
 		Matrix<K> augmReduced = augmented.transpose()
 										 .toReducedRowEchelonForm(f, abs, equals)
@@ -864,9 +861,9 @@ public class Matrix<K> {
 	 * @param r
 	 * @return
 	 */
-	public static<K> Matrix<K> id(Ring<K> r,int... dims){
+	public static<K> Matrix<K> id(Ring<K> r,int dim){
 		
-		Matrix<K> one = new Matrix<K>(dims);
+		Matrix<K> one = new Matrix<K>(dim,dim);
 		
 		for (int i = 0; i < one.dimRows(); i++) {
 			for (int j = 0; j < one.dimCols(); j++) {

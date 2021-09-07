@@ -62,8 +62,7 @@ public class Vector<K> {
 	}
 	
 	/**
-	 * WARNING: this minus def works for the reals ring but not for every rings
-	 * Be aware of your field when you use this function
+	 * It is due to -1*a=-a and a-b := a+(-b)
 	 * @param v
 	 * @param r
 	 * @return

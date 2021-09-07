@@ -117,8 +117,8 @@ public class MatR extends Matrix<Double> {
 		return (MatR) Matrix.zeros(f, dims);
 	}
 	
-	public static MatR id(int... dims) {
-		return (MatR) Matrix.id(f, dims);
+	public static MatR id(int dim) {
+		return (MatR) Matrix.id(f, dim);
 	}
 }
 

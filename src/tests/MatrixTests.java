@@ -53,8 +53,8 @@ class MatrixTests {
 		  													    		 {7.,Math.PI,42.}});
 	
 	public static Matrix<Double> zero = Matrix.zeros(f,2,2);
-	public static Matrix<Double> id2 = Matrix.id(f,2,2);
-	public static Matrix<Double> id3  = Matrix.id(f, 3,3);
+	public static Matrix<Double> id2 = Matrix.id(f,2);
+	public static Matrix<Double> id3  = Matrix.id(f,3);
 
 	@Test
 	void timesTest() {

@@ -7,11 +7,14 @@ import fr.romain.Maths.linalg.Matrix;
 import fr.romain.Maths.utils.Complex;
 
 /**
+ * <p>
  * This interface represents the algebraic structure of Ring on the set K.
  * This ring doesn't aim to be necessarily a commutative one
- * 
+ * </p>
+ * <p>
  * In order to avoid having to create several identical interfaces, we allow ourselves
- * to implement in this file any structure composed of two binary operation
+ * to implement in this file any structure composed similar to rings (like pseudo-ring and half-ring)
+ * </p>
  *
  * @param <K> the set on which we add two laws: + and x
  */
@@ -40,13 +43,14 @@ public interface Ring<K> {
 	}
 	
 	/**
-	 * This function has to be associative
+	 * <ul>
+	 * <li>This function has to be associative <br>
 	 * -> prod(e1,prod(e2,e3)) == prod(prod(e1,e2),e3)
-	 * In order to make a commutative field, it also has to be commutative (facultative)
-	 * -> prod(e1,e2) == prod(e2,e1)
-	 * This operator has to be left-distributive and right-distributive on the + operator of the field:
-	 * -> prod(e1,sum(e2,e3)) == sum(prod(e1,e2),prod(e1,e3))
+	 * <li>This operator has to be left-distributive and right-distributive on the + operator of the field:<br>
+	 * -> prod(e1,sum(e2,e3)) == sum(prod(e1,e2),prod(e1,e3))<br>
 	 * -> prod(sum(e1,e2),e3) == sum(prod(e1,e3),prod(e2,e3))
+	 * <li>In order to make a commutative field, it also has to be commutative (facultative)<br>
+	 * -> prod(e1,e2) == prod(e2,e1)
 	 * @param e1
 	 * @param e2
 	 * @return e1 * e2 with the prod operator defined by the binaryOperator at the construction of the field.
@@ -162,7 +166,7 @@ public interface Ring<K> {
 	}
 	
 	/**
-	 * This ring is a pseudo-ring because it has no neutral element for the
+	 * If dims[0] != dims[1], this ring is a pseudo-ring because it has no neutral element for the
 	 * multiplication
 	 * @param <T>
 	 * @param r
@@ -170,10 +174,21 @@ public interface Ring<K> {
 	 * @return
 	 */
 	public static<T> Ring<Matrix<T>> matricesRing(Ring<T> r,int... dims){
+		if(dims[0]==dims[1]) {
+			return squareMatricesRing(r, dims[0]);
+		}
 		return of((Matrix<T> m1,Matrix<T> m2)->m1.plus(m2, r), 
 				(Matrix<T> m1,Matrix<T> m2)->m1.prod(m2, r), 
 				Matrix.zeros(r, dims), 
 				null, 
+				(Matrix<T> m)->m.times(r.sumInv(r.one()), r));
+	}
+	
+	public static<T> Ring<Matrix<T>> squareMatricesRing(Ring<T> r,int dim){
+		return of((Matrix<T> m1,Matrix<T> m2)->m1.plus(m2, r), 
+				(Matrix<T> m1,Matrix<T> m2)->m1.prod(m2, r), 
+				Matrix.zeros(r, dim,dim), 
+				Matrix.id(r, dim), 
 				(Matrix<T> m)->m.times(r.sumInv(r.one()), r));
 	}
 	
