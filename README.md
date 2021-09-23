@@ -47,10 +47,10 @@ Les structures algébriques les plus courantes ont déjà été implémentées :
 
 **Contexte** : Etant donné que la classe Matrix permet de gérer les opérations usuelles sur les matrices contenant un type générique K, les méthodes qui en découlent sont lourdes à l'écriture. En effet, l'utilisateur doit spécifier pour chaque méthode (plus,prod,gaussInv) l'anneau ou le corps sur lequel il souhaite travailler.
 
-Pour simplifier cette écriture, deux possibilités ont été trouvées :
+Pour simplifier cette écriture, trois possibilités ont été trouvées :
  - la première : On manipule les objets Matrix via une implémentation de l'interface VectorSpace qui ne propose que les opérations sur les matrices vues comme des vecteurs. 
  - la seconde : On crée une classe qui hérite de Matrix pour K déterminé. Ce sont les classes MatR, MatC et VectR. Le but est d'éviter à l'utilisateur de devoir spécifier les structures algébriques sur K avec lesquelles il veut travailler. Ces dernières sont prédéfinies comme final static dans chaque classe.
- - Une dernière solution existe : l'anneau sur le type K utilisé par la matrice est un attribut de la classe, spécifié par l'utilisateur à l'appel du constructeur. Le problème de cette méthode est que si l'on multiplie deux matrices entre elles qui possèdent des anneaux différents, une ambiguïté existe sur la structure algébrique qui sera utilisée pour manipuler les éléments dans les matrices.
+ - la troisième : l'anneau sur le type K utilisé par la matrice est un attribut de la classe, spécifié par l'utilisateur à l'appel du constructeur. Le problème de cette méthode est que si l'on multiplie deux matrices entre elles qui possèdent des anneaux différents, une ambiguïté existe sur la structure algébrique qui sera utilisée pour manipuler les éléments dans les matrices.
 
 ## Le package "utils"
 
