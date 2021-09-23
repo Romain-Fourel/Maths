@@ -3,7 +3,7 @@
 Ce projet a pour but initial de pouvoir stocker dans des matrices d'autres objets que des nombres réels, comme des nombres complexes. Pour cette raison, j'ai rendu la classe représentant les matrices, générique. Le type générique K représente le type des éléments contenus dans la matrice. 
 Or, pour pouvoir tout de même définir les opérations usuelles sur les matrices (somme, produit, inversion,...), il faut définir des structures algébriques qui régiront les interactions entre les objets de type K.
 
-Il a ensuite été ajouté au projet des fonctionnalités de machine learning utilisant l'algèbre linéaire.
+Il a ensuite été ajouté au projet des algorithmes de machine learning que j'ai implémenté en utilisant les outils pour l'algèbre linéaire préalablement codés.
 
 ## Le package "mlearn"
 
