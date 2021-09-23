@@ -373,9 +373,9 @@ class MatrixTests {
 		for (Matrix<Double> matrix : matrices) {
 			List<Vector<Double>> ker = matrix.ker(f, Math::abs, p);
 			for (Vector<Double> root : ker) {
-				Matrix<Double> result = matrix.prod(root.toMatrix().transpose(), f);
+				Matrix<Double> result = matrix.prod(root.toColMat(), f);
 				System.out.println(result);
-				assertTrue(result.equals(Matrix.zeros(f, new int[] {matrix.dimRows(),1}), p));
+				assertTrue(result.equals(Matrix.zeros(f, matrix.dimRows(),1), p));
 			}
 		}
 	}

@@ -28,5 +28,13 @@ public class Reals {
     public static double normInf(Double... values) {
     	return Norms.normInf(Math::abs, values);
     }
+    
+    public static double sum(Double... values) {
+    	double sum = 0;
+    	for (Double value : values) {
+			sum+=value;
+		}
+    	return sum;
+    }
 
 }

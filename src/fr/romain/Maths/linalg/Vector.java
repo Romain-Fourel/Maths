@@ -6,7 +6,7 @@ import java.util.function.BiPredicate;
 
 import fr.romain.Maths.linalg.algstruct.Ring;
 
-public class Vector<K> {
+public class Vector<K>{
 	
 	private Object[] values;
 	
@@ -40,12 +40,15 @@ public class Vector<K> {
 	 * All vectors can be seen as a matrix
 	 * @return
 	 */
-	public Matrix<K> toMatrix(){
+	public Matrix<K> toRowMat(){
 		Matrix<K> matrix = new Matrix<K>(1, dim());
-		
-		for (int i = 0; i < dim(); i++) {
-			matrix.set(0, i, get(i));
-		}
+		matrix.setRow(0, this);
+		return matrix;
+	}
+	
+	public Matrix<K> toColMat(){
+		Matrix<K> matrix = new Matrix<K>(dim(),1);
+		matrix.setCol(0, this);
 		return matrix;
 	}
 	

@@ -80,6 +80,12 @@ public class Matrix<K> {
 		return rows;
 	}
 	
+	public void setCol(int j,Vector<K> col) {
+		for (int i = 0; i < dimRows(); i++) {
+			values[i][j]=col.get(i);
+		}
+	}
+	
 	public Vector<K> getCol(int j){
 		Vector<K> col = new Vector<>(dimRows());
 		for (int i = 0; i < dimRows(); i++) {
@@ -900,13 +906,13 @@ public class Matrix<K> {
 	//######################### below: operations on matrices less usual ###########################
 	
 	/**
-	 * The term by term product on matrices. <br>
+	 * The element-wise product on matrices. <br>
 	 * It is the hadamard product
 	 * @param matrix
 	 * @param r
 	 * @return
 	 */
-	public Matrix<K> termByTermProd(Matrix<K> matrix, Ring<K> r){
+	public Matrix<K> hadamardProd(Matrix<K> matrix, Ring<K> r){
 		if (!hasDim(matrix.dims())) {
 			throw new NotSameDimensionsException(dims(), matrix.dims());
 		}
@@ -928,7 +934,7 @@ public class Matrix<K> {
 	 * @param f
 	 * @return
 	 */
-	public Matrix<K> termByTermInv(Field<K> f){
+	public Matrix<K> hadamardInv(Field<K> f){
 		Matrix<K> inv = new Matrix<>(dims());
 		for (int i = 0; i < dimRows(); i++) {
 			for (int j = 0; j < dimCols(); j++) {
