@@ -239,7 +239,12 @@ public class Matrix<K> {
 		return transpose;
 	}
 	
-	
+	public K asScalar() {
+		if(dimCols()*dimRows()!=1) {
+			throw new NotMatchingDimensionsException("This matrix can't be seen as a scalar because it is too big");
+		}
+		return get(0, 0);
+	}
 	
 	public K trace(Ring<K> r){
 		if (!isSquare()) {
@@ -251,7 +256,7 @@ public class Matrix<K> {
 		}
 		return trace;
 	}
-	
+      
 	
 	/**
 	 * The usual scalar prod : Tr(tAxB)

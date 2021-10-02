@@ -7,7 +7,9 @@ Il a ensuite été ajouté au projet des algorithmes de machine learning que j'a
 
 ## Le package "mlearn"
 
-Ici sont stockés tous les algorithmes de machine learning. Pour l'instant un seul a été implémenté : la régression linéaire par descente de gradient ou par l'équation normale (au choix).
+Ici sont stockés tous les algorithmes de machine learning. Pour l'instant deux algorithmes ont été implémentés : 
+ - La régression linéaire par descente de gradient ou par l'équation normale (au choix).
+ - La régression logistique permettant de résoudre une classification binaire (sortie 0 ou 1)
 Ce package utilise les objets MatR et VectR du package linalg présenté ci-dessous
 
 

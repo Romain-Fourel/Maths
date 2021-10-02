@@ -139,6 +139,24 @@ public class MatR extends Matrix<Double> {
 		}
 	}
 	
+	public void forEachElmt(Function<Double, Double> f) {
+		for (int i = 0; i < dimRows(); i++) {
+			for (int j = 0; j < dimCols(); j++) {
+				set(i, j, f.apply(get(i, j)));
+			}
+		}
+	}
+	
+	public MatR elmtWise(Function<Double, Double> f) {
+		MatR res = new MatR(dims());
+		for (int i = 0; i < dimRows(); i++) {
+			for (int j = 0; j < dimCols(); j++) {
+				res.set(i, j,f.apply(get(i, j)));
+			}
+		}
+		return res;
+	}
+	
 	
 	@Override
 	public String toString() {
